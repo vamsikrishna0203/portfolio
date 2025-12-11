@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vamsikrishna R — Portfolio</title>
+  <style>
+    :root{
+      --background:#071015; --foreground:#7bff8c; --card:#0b0f12; --primary:#00ff66;
+      --secondary:#00e5ff; --accent:#ffc84d; --muted:#0f1214; --border:rgba(120,255,140,0.15);
+      --font:'JetBrains Mono', monospace;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+    *{box-sizing:border-box} 
+    html,body{margin:0;background:var(--background);color:var(--foreground);font-family:var(--font)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+
+    /* Navigation */
+    nav{position:fixed;top:0;left:0;right:0;z-index:99;padding:10px 18px;display:flex;justify-content:center}
+    .nav-inner{max-width:1100px;width:100%;display:flex;justify-content:space-between;align-items:center}
+    .nav-links{display:flex;gap:10px}
+    .nav-links a{padding:8px 12px;border-radius:6px;color:#bbb}
+    .nav-links a.active{color:var(--primary);text-shadow:0 0 8px var(--primary)}
+
+    header.hero{min-height:90vh;display:flex;align-items:center;justify-content:center;padding-top:70px;position:relative;z-index:2}
+    .terminal{border:1px solid var(--border);padding:22px;border-radius:10px;background:rgba(255,255,255,0.02)}
+    .cmd{color:var(--secondary);display:flex;gap:12px}
+
+    .name{font-size:5ch;margin:0;text-shadow:0 0 12px var(--primary)}
+    .role{color:var(--accent);margin:6px 0 14px;font-weight:600}
+
+    /* Sections */
+    .section-title{margin-bottom:12px;color:#ddd}
+    .terminal-area{background:rgba(255,255,255,0.03);padding:14px;border-radius:8px}
+
+    /* Skills */
+    .skill-tabs button{padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:#0b0f12;color:#eee;cursor:pointer}
+    .skill-tabs button.active{background:var(--primary);color:#001c0d}
+    .skill-bar{height:6px;background:#333;border-radius:4px;overflow:hidden}
+    .skill-fill{height:100%;background:var(--primary)}
+
+    /* Resume blocks */
+    .resume-block{background:#0b0f12;padding:18px;border-radius:10px;border:1px solid var(--border);margin-bottom:18px}
+
+    /* Projects */
+    .project-list,.project-detail{background:rgba(255,255,255,0.03);padding:14px;border-radius:8px}
+
+    /* Matrix Background */
+    canvas.matrix{position:fixed;inset:0;z-index:0;opacity:0.12;pointer-events:none}
+  </style>
+</head>
+<body>
+
+  <canvas class="matrix"></canvas>
+
+  <nav>
+    <div class="nav-inner container">
+      <div class="logo"><strong style="color:var(--primary)">~/vamsikrishna R</strong></div>
+      <div class="nav-links">
+        <a href="#about" id="nav-about">about</a>
+        <a href="#skills" id="nav-skills">skills</a>
+        <a href="#projects" id="nav-projects">projects</a>
+        <a href="#resume" id="nav-resume">resume</a>
+        <a href="#contact" id="nav-contact">contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="terminal">
+        <div class="cmd">
+          <span>$</span>
+          <div id="type-cmd"></div>
+        </div>
+        <h1 class="name" id="typed-name">Vamsikrishna R</h1>
+        <div class="role">Java Full Stack Developer</div>
+        <p style="opacity:0.7">Building clean, scalable, real-world applications.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-title">$ cat about_me.md</div>
+      <div class="terminal-area">
+        Hello! I'm <b>Vamsikrishna</b>, a Java Full Stack Developer with 6+ months experience.Highly motivated and detail-oriented Java Full Stack Developer with 6 months of internship experience in developing scalable and efficient applications. Proficient in Java, Spring Boot, and front-end technologies like HTML, CSS, and JavaScript. Passionate about learning and implementing new technologies to drive innovation and growth.
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+      <div class="section-title">$ ./analyze_skills.sh --verbose</div>
+
+      <div class="skill-tabs" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+        <button class="active" data-tab="languages">Languages</button>
+        <button data-tab="frameworks">Frameworks</button>
+        <button data-tab="tools">Tools</button>
+        <button data-tab="concepts">Core Concepts</button>
+      </div>
+
+      <div id="skill-content" class="terminal-area"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title">$ ls -la ~/projects/</div>
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px">
+        <div id="project-list" class="project-list"></div>
+        
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume">
+      <div class="section-title">$ cat resume.md |</div>
+
+      <div class="resume-block">
+        <h3 style="color:var(--primary)">Professional Experience</h3>
+        <p><b>Java Full Stack Developer — 6 months</b></p>
+        <ul>
+          <li>Developed full-stack apps using Java + Spring Boot</li>
+          <li>Created responsive UI with HTML/CSS/JS</li>
+          <li>Implemented REST APIs</li>
+          <li>Used Git for version control</li>
+        </ul>
+      </div>
+
+      <div class="resume-block">
+        <h3 style="color:var(--primary)">Skills Summary</h3>
+        Java, HTML5, CSS3, JavaScript, Spring Boot, Hibernate, MySQL, Git.
+      </div>
+
+      <div class="resume-block">
+        <h3 style="color:var(--primary)">Education</h3>
+        <p>MBA — Human Resource & Systems, Sri Venkateshwara University, 2024</p>
+        <p>B.Sc — Computer Science, Sri Venkateshwara University, 2021</p>
+      </div>
+
+      <div class="resume-block">
+        <h3 style="color:var(--primary)">Certifications</h3>
+        <ul>
+          <li>Java Programming</li>
+          <li>Web Development</li>
+          <li>Git & Version Control</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">$ ./contact.sh</div>
+      <div class="terminal-area">
+        Email: <b>rvamsikrishna258@gmail.com</b><br>
+        GitHub: github.com/vamsikrishna<br>
+        LinkedIn: www.linkedin.com/in/vamsi-krishna-r-vam
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align:center;padding:20px;opacity:0.6">© Vamsikrishna R</footer>
+
+
+<script>
+/* MATRIX BACKGROUND */
+(function(){
+  const canvas = document.querySelector('canvas.matrix');
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = innerWidth;
+  let h = canvas.height = innerHeight;
+  const chars = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const fontSize = 14;
+  let columns = Math.floor(w/fontSize);
+  let drops = Array(columns).fill(1);
+  function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight;columns=Math.floor(w/fontSize);drops=new Array(columns).fill(1)}
+  addEventListener('resize',resize);
+  function draw(){
+    ctx.fillStyle='rgba(0,0,0,0.05)';
+    ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='hsl(120,100%,50%)';
+    ctx.font=fontSize+'px monospace';
+    for(let i=0;i<drops.length;i++){
+      const text = chars[Math.floor(Math.random()*chars.length)];
+      const x = i*fontSize; const y = drops[i]*fontSize;
+      ctx.globalAlpha = Math.random()*0.5+0.1;
+      ctx.fillText(text,x,y);
+      if(y>h && Math.random()>0.975) drops[i]=0;
+      drops[i]++;
+    }
+    ctx.globalAlpha=1;
+  }
+  setInterval(draw,50);
+})();
+
+/* TYPING EFFECT */
+(function(){
+  const seq = ['whoami --verbose'];
+  const el = document.getElementById('type-cmd');
+  let idx=0; let char=0;
+  function step(){
+    if(idx>=seq.length) return;
+    const s=seq[idx];
+    if(char<=s.length){
+      el.textContent = s.slice(0,char)+'▌'; char++; setTimeout(step,80);
+    } else {
+      el.textContent = s;
+    }
+  }
+  step();
+})();
+
+/* SKILLS LOGIC */
+const skillData = {
+  languages:[{name:'Java',level:85},{name:'HTML5',level:90},{name:'CSS3',level:85},{name:'JavaScript',level:60}],
+  frameworks:[{name:'Spring Boot',level:70},{name:'Hibernate',level:65},{name:'JDBC',level:75},{name:'Servlets & JSP',level:70}],
+  tools:[{name:'Git & GitHub',level:70},{name:'VS Code',level:90},{name:'Eclipse IDE',level:85},{name:'MySQL',level:65}],
+  concepts:[{name:'OOP Principles',level:85},{name:'REST APIs',level:70},{name:'MVC Architecture',level:75},{name:'Database Design',level:65}]
+};
+
+function renderSkills(tab){
+  const box=document.getElementById('skill-content');
+  box.innerHTML='';
+  skillData[tab].forEach(s=>{
+    box.innerHTML += `
+      <div style='margin-bottom:12px'>
+        <div style='display:flex;justify-content:space-between'>
+          <span>${s.name}</span><span>${s.level}%</span>
+        </div>
+        <div class='skill-bar'><div class='skill-fill' style='width:${s.level}%' ></div></div>
+      </div>`;
+  });
+}
+renderSkills('languages');
+
+document.querySelectorAll('.skill-tabs button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.skill-tabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderSkills(btn.dataset.tab);
+  };
+});
+
+/* PROJECTS */
+const projects=[
+  {id:1,folder:'portfolio',name:'Portfolio Website'},
+  {id:2,folder:'ecommerce-app',name:'E-Commerce Platform'},
+  {id:3,folder:'student-mgmt',name:'Student Management System'},
+  {id:4,folder:'task-api',name:'Task Manager API'},
+  
+];
+const list=document.getElementById('project-list');
+projects.forEach(p=>{
+  const div=document.createElement('div');
+  div.style.padding='6px';div.style.cursor='pointer';
+  div.textContent=p.folder+'/';
+  div.onclick=()=>{document.getElementById('project-detail').textContent=p.name;};
+  list.appendChild(div);
+});
+</script>
+
+</body>
+</html>
